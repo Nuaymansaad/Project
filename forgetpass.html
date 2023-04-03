@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Forgot Password</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+      h2 {
+        text-align: center;
+        color: #555;
+      }
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+        color: #555;
+      }
+      input[type="email"] {
+        display: block;
+        width: 93%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+      .otp-section {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Forgot Password</h2>
+    <form id="forgot-password-form" action="password_reset.php" method="post">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required><br><br>
+      <input type="submit" value="Send OTP">
+    </form>
+    <form id="otp-verification-form" class="otp-section" action="verify_otp.php" method="post">
+  <input type="hidden" id="email" name="email" value="<?php echo htmlspecialchars($_GET["email"]); ?>
+  <label for="otp">Enter OTP:</label>
+  <input type="text" id="otp" name="otp" required><br><br>
+  <input type="submit" value="Verify OTP">
+</form>
+
+    <script>
+      var forgotPasswordForm = document.getElementById("forgot-password-form");
+      var otpVerificationForm = document.getElementById("otp-verification-form");
+      forgotPasswordForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        forgotPasswordForm.style.display = "none";
+        otpVerificationForm.style.display = "block";
+      });
+    </script>
+  </body>
+</html>
