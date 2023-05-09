@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // prepare SQL statement
-    $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
+    $sql = "SELECT id FROM users WHERE email = '$email' AND password = '$password'";
 
     // execute SQL statement
     $result = mysqli_query($conn, $sql);
@@ -23,13 +23,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // check if any rows were returned
     if (mysqli_num_rows($result) > 0) {
         // login successful
+        $row = mysqli_fetch_assoc($result);
+        $user_id = $row["id"];
         session_start();
-        $_SESSION["email"] = $email;
-        header("Location: dashboard.html");
+        $_SESSION["user_id"] = $user_id;
+        header("Location: dashboard.php");
         exit();
     } else {
         // login failed
-        echo "Invalid email or password.";
+        echo "<div style=\"background-color: #f2f2f2; padding: 20px; border: 1px solid #ccc; border-radius: 5px; text-align: center;\">";
+        echo "<p style=\"font-size: 24px; color: #333;\">Invalid email or password.</p>";
+        echo "<a href=\"login.html\" style=\"display: inline-block; background-color: #333; color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-size: 16px;\">Try Again</a>";
+        echo "</div>";
+
     }
 
     // close connection

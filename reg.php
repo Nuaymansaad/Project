@@ -49,9 +49,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // execute statement
     if ($stmt->execute()) {
         // success
-        echo "<p>Registration Complete.</p>";
-        echo "<a href='login.html'>Click here to go to the login page</a>";
-        
+        echo "<div style=\"background-color: #f2f2f2; padding: 20px; border: 1px solid #ccc; border-radius: 5px; text-align: center;\">";
+        echo "<p style=\"font-size: 24px; color: #333;\">Registration Complete.</p>";
+        echo "<a href=\"login.html\" style=\"display: inline-block; background-color: #333; color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-size: 16px;\">Click here to go to the login page</a>";
+        echo "</div>";
         exit();
     } else {
         // error
@@ -63,3 +64,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_close($conn);
 }
 ?>
+
